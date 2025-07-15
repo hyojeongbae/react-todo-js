@@ -1,0 +1,23 @@
+Phase0: #0-1. 리액트 프로젝트 생성, Tailwind 설치
+
+	# Vite 빌드툴을 활용하여 프로젝트 생성
+	npm create vite@latest react-todo-js -- --template react
+
+	# Tailwind 설치(https://tailwindcss.com/docs/guides/vite)
+	링크 내 02번[Install Tailwind CSS]부터 진행
+
+Phase1: #1-1. 기본 폴더 구조 생성, 할일 관리 UI 작성, 절대경로(@) 추가(vite.config.js)
+
+# 기본 폴더 구조
+	src/
+		components/ - 기본적인 컴포넌트들을 작성하는 경로
+			todos/ - 할일 관리(특정 도메인)와 관련된 컴포넌트들만 모아둔 경로
+			ui/ - 도메인과 관련 없이 어느 곳에서든 공통적으로 사용할 수 있는 범용적인 UI
+		constants/ - 상수로 관리할 값들, 함수 등을 모아둔 경로
+		laytous/ - 레이아웃 용도의 경로
+		contexts/ - Context 관련 경로
+		utils/ - 유틸 함수
+
+# 절대경로(@) 추가 옵션은 선택적인 기능
+
+# 메인페이지 UI만 구현(기능이 동작하지 않음, Non-interactive)
