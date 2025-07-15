@@ -1,5 +1,6 @@
 // App이라는 이름의 함수형 컴포넌트
 
+import { useState } from "react"
 import TodoBody from "./components/todos/TodoBody"
 import TodoHeader from "./components/todos/TodoHeader"
 import DefaultLayout from "./layouts/DefaultLayout"
@@ -27,6 +28,18 @@ const dummyTodos = [
 
 function App() {
 
+  const [todos, setTodos] = useState(dummyTodos);
+
+  const addTodoHandler = (todo) => {
+    const newTodo = {
+      id: self.crypto.randomUUID(),
+      ...todo
+    }
+
+    const updatedTodos = [...todos, newTodo];
+    setTodos(updatedTodos);
+  }
+
   return (
       <DefaultLayout>
         <header>
@@ -37,10 +50,10 @@ function App() {
         </header>
 
         <section className='max-w-xl m-4 mx-auto'>
-          <TodoHeader />
+          <TodoHeader onAdd={addTodoHandler}/>
 
           {/* 할일 목록 */}
-          <TodoBody todos={dummyTodos} />
+          <TodoBody todos={todos} />
         </section>
       </DefaultLayout>
   )
