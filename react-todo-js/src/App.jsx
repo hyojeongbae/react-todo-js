@@ -4,11 +4,29 @@ import TodoBody from "./components/todos/TodoBody"
 import TodoHeader from "./components/todos/TodoHeader"
 import DefaultLayout from "./layouts/DefaultLayout"
 
-// 해당 컴포넌트의 파일명은 App.jsx(js)로 만듦
+const dummyTodos = [
+  {
+    id: 1,
+    title: 'React 공부',
+    summary: 'React를 공부한다.',
+    category: 'TODO',
+  },
+  {
+    id: 2,
+    title: '점심 먹기',
+    summary: '점심을 먹는다.',
+    category: 'PROGRESS',
+  },
+  {
+    id: 3,
+    title: '커피 마시기',
+    summary: '커피를 마신다.',
+    category: 'DONE',
+  }
+]
+
 function App() {
 
-  {/*children prop 참고자료
-     합성 vs 상속(https://ko.legacy.`reactjs.org/docs/composition-vs-inheritance.html) */}
   return (
       <DefaultLayout>
         <header>
@@ -22,7 +40,7 @@ function App() {
           <TodoHeader />
 
           {/* 할일 목록 */}
-          <TodoBody />
+          <TodoBody todos={dummyTodos} />
         </section>
       </DefaultLayout>
   )
