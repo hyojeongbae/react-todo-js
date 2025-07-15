@@ -7,7 +7,7 @@ import TodoForm from './TodoForm';
 
 
 // TodoBody에서 todo라는 이름의 props를 전달(내려줬음)
-const TodoItem = ({ todo, onUpdate }) => {
+const TodoItem = ({ todo, onUpdate, onDelete }) => {
 
   const [openModal, open] = useState(false);
 
@@ -23,7 +23,8 @@ const TodoItem = ({ todo, onUpdate }) => {
         <div className="flex items-center gap-1">
             <IconButton 
               onClick={()=>open(true)} icon={'✏️'}/>
-            <IconButton icon={'🗑'} />
+            <IconButton 
+              onClick={()=>onDelete(todo.id)} icon={'🗑'} />
         </div>
         {openModal && createPortal(
           <Modal onClose={()=>open(false)}>

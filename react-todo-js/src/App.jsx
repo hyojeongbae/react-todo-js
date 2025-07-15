@@ -45,6 +45,11 @@ function App() {
     setTodos(updatedTodos);
   }
 
+  const deleteTodoHandler = (id) => {
+    const updatedTodos = todos.filter((todo) => todo.id !== id);
+    setTodos(updatedTodos);
+  }
+
   return (
       <DefaultLayout>
         <header>
@@ -60,7 +65,8 @@ function App() {
           {/* 할일 목록 */}
           <TodoBody 
             todos={todos} 
-            onUpdate={updateTodoHandler} />
+            onUpdate={updateTodoHandler}
+            onDelete={deleteTodoHandler} />
         </section>
       </DefaultLayout>
   )
