@@ -40,6 +40,11 @@ function App() {
     setTodos(updatedTodos);
   }
 
+  const updateTodoHandler = (updateTodo) => {
+    const updatedTodos = todos.map(todo => todo.id === updateTodo.id ? updateTodo : todo);
+    setTodos(updatedTodos);
+  }
+
   return (
       <DefaultLayout>
         <header>
@@ -53,7 +58,9 @@ function App() {
           <TodoHeader onAdd={addTodoHandler}/>
 
           {/* 할일 목록 */}
-          <TodoBody todos={todos} />
+          <TodoBody 
+            todos={todos} 
+            onUpdate={updateTodoHandler} />
         </section>
       </DefaultLayout>
   )
