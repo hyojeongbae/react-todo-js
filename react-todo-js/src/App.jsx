@@ -29,6 +29,7 @@ const dummyTodos = [
 function App() {
 
   const [todos, setTodos] = useState(dummyTodos);
+  const [selectedCategory, setFilter] = useState('ALL');
 
   const addTodoHandler = (todo) => {
     const newTodo = {
@@ -50,6 +51,14 @@ function App() {
     setTodos(updatedTodos);
   }
 
+  const filterTodos = () => {
+    return (
+      selectedCategory === 'ALL' ? todos : todos.filter(
+      todo => selectedCategory === todo.category));
+  }
+
+  const filteredTodos = filterTodos();
+
   return (
       <DefaultLayout>
         <header>
@@ -60,11 +69,14 @@ function App() {
         </header>
 
         <section className='max-w-xl m-4 mx-auto'>
-          <TodoHeader onAdd={addTodoHandler}/>
+          <TodoHeader 
+            onAdd={addTodoHandler}
+            category={selectedCategory}
+            onFilter={setFilter}/>
 
           {/* 할일 목록 */}
           <TodoBody 
-            todos={todos} 
+            todos={filteredTodos} 
             onUpdate={updateTodoHandler}
             onDelete={deleteTodoHandler} />
         </section>

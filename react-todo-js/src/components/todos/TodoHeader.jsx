@@ -4,7 +4,7 @@ import { createPortal } from 'react-dom';
 import Modal from '../ui/Modal';
 import TodoForm from './TodoForm';
 
-const TodoHeader = ({ onAdd, todo }) => {
+const TodoHeader = ({ onAdd, onFilter, category }) => {
 
   const [openModal, open] = useState(false);
 
@@ -24,7 +24,7 @@ const TodoHeader = ({ onAdd, todo }) => {
         </Modal>, document.body
       )}
 
-      <TodoFilter />
+      <TodoFilter category={category} onFilter={onFilter} />
     </div>
   )
 }
