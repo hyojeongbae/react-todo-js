@@ -51,6 +51,12 @@ function App() {
     setTodos(updatedTodos);
   }
 
+  const updateCategoryHandler = (id, updatedCategory) => {
+    const updatedTodos = todos.map(
+      todo => todo.id === id ? {...todo, category: updatedCategory} : todo);
+    setTodos(updatedTodos);
+  }
+
   const filterTodos = () => {
     return (
       selectedCategory === 'ALL' ? todos : todos.filter(
@@ -78,7 +84,8 @@ function App() {
           <TodoBody 
             todos={filteredTodos} 
             onUpdate={updateTodoHandler}
-            onDelete={deleteTodoHandler} />
+            onDelete={deleteTodoHandler}
+            onChange={updateCategoryHandler} />
         </section>
       </DefaultLayout>
   )
