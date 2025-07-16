@@ -1,8 +1,10 @@
 import { TODO_CATEGORY_ICON } from '@/constants/icon'
 import { useState } from 'react';
+import { useTodoContext } from '../../contexts/TodoContext';
 
-const TodoForm = ({ buttonText, actionTitle, onClose, onAction, todo }) => {
+const TodoForm = ({ buttonText, actionTitle, onClose, todo }) => {
 
+    const {addTodoHandler, updateTodoHandler} = useTodoContext();
     const isNewTodoForm = actionTitle.startsWith('등록') ? true : false;
 
     const [title, setTitle] = useState(isNewTodoForm ? '' : todo.title);
@@ -13,16 +15,15 @@ const TodoForm = ({ buttonText, actionTitle, onClose, onAction, todo }) => {
         const updatedTodo = {
             title, 
             summary, 
-            category
+            category, 
         };
 
         if (!isNewTodoForm) {
             updatedTodo.id = todo.id;
+            updateTodoHandler(updatedTodo);
         } else {
-            updatedTodo.id = self.crypto.randomUUID();
+            addTodoHandler(updatedTodo);
         }
-        
-        onAction(updatedTodo);
 
         onClose();
     }

@@ -4,11 +4,13 @@ import IconButton from '../ui/IconButton';
 import { createPortal } from 'react-dom';
 import Modal from '../ui/Modal';
 import TodoForm from './TodoForm';
+import { useTodoContext } from '../../contexts/TodoContext';
 
 
 // TodoBody에서 todo라는 이름의 props를 전달(내려줬음)
-const TodoItem = ({ todo, onUpdate, onDelete, onChange }) => {
+const TodoItem = ({ todo }) => {
 
+  const {deleteTodoHandler, updateCategoryHandler} = useTodoContext();
   const [openModal, open] = useState(false);
 
   return (
@@ -20,7 +22,7 @@ const TodoItem = ({ todo, onUpdate, onDelete, onChange }) => {
                 value={todo.category}
                 className="p-0.5 text-gray-100 bg-gray-800 rounded"
                 data-cy="todo-filter" 
-                onChange={event => onChange(todo.id, event.target.value)}
+                onChange={event => updateCategoryHandler(todo.id, event.target.value)}
                           >
                     <option value="TODO">{TODO_CATEGORY_ICON.TODO} To do</option>
                     <option value="PROGRESS">{TODO_CATEGORY_ICON.PROGRESS} On progress</option>
@@ -36,14 +38,14 @@ const TodoItem = ({ todo, onUpdate, onDelete, onChange }) => {
             <IconButton 
               onClick={()=>open(true)} icon={'✏️'}/>
             <IconButton 
-              onClick={()=>onDelete(todo.id)} icon={'🗑'} />
+              onClick={()=>deleteTodoHandler(todo.id)} icon={'🗑'} />
         </div>
         {openModal && createPortal(
           <Modal onClose={()=>open(false)}>
             <TodoForm 
               actionTitle={'수정'} 
               buttonText={'Update'} 
-              onAction={onUpdate} 
+              // onAction={onUpdate} 
               onClose={()=>open(false)}
               todo={todo} 
             />

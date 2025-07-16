@@ -3,9 +3,11 @@ import TodoFilter from './TodoFilter'
 import { createPortal } from 'react-dom';
 import Modal from '../ui/Modal';
 import TodoForm from './TodoForm';
+import { useTodoContext } from '../../contexts/TodoContext';
 
-const TodoHeader = ({ onAdd, onFilter, category }) => {
+const TodoHeader = () => {
 
+  const {selectedCategory, setFilter} = useTodoContext();
   const [openModal, open] = useState(false);
 
   return (
@@ -18,13 +20,12 @@ const TodoHeader = ({ onAdd, onFilter, category }) => {
         <Modal onClose={()=>open(false)}>
           <TodoForm 
             buttonText={'Add'} 
-            actionTitle={'등록'} 
-            onAction={onAdd} 
+            actionTitle={'등록'}  
             onClose={()=>open(false)}/>
         </Modal>, document.body
       )}
 
-      <TodoFilter category={category} onFilter={onFilter} />
+      <TodoFilter category={selectedCategory} onFilter={setFilter} />
     </div>
   )
 }
